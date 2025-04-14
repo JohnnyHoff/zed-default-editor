@@ -18,10 +18,8 @@ It:
 No need to download anything — just run this in your terminal:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/YOUR-USERNAME/zed-default-editor/main/set_zed_defaults.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/YOUR-USERNAME/JohnnyHoff/main/set_zed_defaults.sh)
 ```
-
-> Replace `YOUR-USERNAME` with your actual GitHub username.
 
 ---
 
