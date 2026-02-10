@@ -18,7 +18,7 @@ It:
 No need to download anything — just run this in your terminal:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/JohnnyHoff/main/set_zed_defaults.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/JohnnyHoff/zed-default-editor/refs/heads/main/set_zed_defaults.sh)
 ```
 
 ---
