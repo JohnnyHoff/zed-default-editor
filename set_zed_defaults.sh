@@ -1,4 +1,10 @@
 #!/bin/bash
+set -euo pipefail
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "❌ This script only supports macOS."
+  exit 1
+fi
 
 # Check for duti, install if missing
 if ! command -v duti &>/dev/null; then
@@ -47,6 +53,7 @@ echo "✅ Using $ZED_APP_NAME with bundle ID: $ZED_BUNDLE_ID"
 UTIS=(
   "public.plain-text"
   "public.utf8-plain-text"
+  "public.text"
   "public.unix-executable"
   "public.script"
   "public.source-code"
@@ -75,6 +82,8 @@ UTIS=(
   "public.css"
   "public.html"
   "public.markdown"
+  "com.apple.markdown"
+  "com.apple.x-markdown"
   "net.daringfireball.markdown"
   "public.ini-settings"
   "com.microsoft.windows-ini"
@@ -84,14 +93,105 @@ UTIS=(
   "dyn.ah62d4rv4ge8044pq"  # mdx (Dynamic UTI for Markdown Extended)
 )
 
+# File extensions for common dev files (duti accepts extension names without the dot)
+EXTENSIONS=(
+  "txt"
+  "md"
+  "markdown"
+  "mdx"
+  "log"
+  "json"
+  "jsonc"
+  "yaml"
+  "yml"
+  "toml"
+  "ini"
+  "cfg"
+  "conf"
+  "env"
+  "xml"
+  "plist"
+  "js"
+  "jsx"
+  "mjs"
+  "cjs"
+  "ts"
+  "tsx"
+  "css"
+  "scss"
+  "sass"
+  "less"
+  "html"
+  "htm"
+  "sh"
+  "bash"
+  "zsh"
+  "fish"
+  "py"
+  "pyi"
+  "rb"
+  "erb"
+  "php"
+  "phtml"
+  "go"
+  "rs"
+  "c"
+  "h"
+  "cpp"
+  "hpp"
+  "cc"
+  "cxx"
+  "m"
+  "mm"
+  "swift"
+  "java"
+  "kt"
+  "kts"
+  "scala"
+  "sc"
+  "cs"
+  "fs"
+  "fsx"
+  "vb"
+  "sql"
+  "graphql"
+  "gql"
+  "gradle"
+  "groovy"
+  "lua"
+  "r"
+  "hs"
+  "clj"
+  "cljs"
+  "cljc"
+  "edn"
+  "ex"
+  "exs"
+  "erl"
+  "hrl"
+  "dart"
+  "asm"
+  "s"
+  "make"
+  "mk"
+)
+
 # Apply defaults using duti
+apply_duti() {
+  local target=$1
+  if ! duti -s "$ZED_BUNDLE_ID" "$target" all; then
+    echo "⚠️  Skipping $target (not a valid UTI/extension on this system)."
+  fi
+}
+
 for uti in "${UTIS[@]}"; do
   echo "🔧 Setting $uti to open with $ZED_APP_NAME..."
-  duti -s "$ZED_BUNDLE_ID" "$uti" all
+  apply_duti "$uti"
 done
 
-# Handle file extension for .mdx explicitly
-echo "🔧 Setting .mdx extension to open with $ZED_APP_NAME..."
-duti -s "$ZED_BUNDLE_ID" mdx all
+for ext in "${EXTENSIONS[@]}"; do
+  echo "🔧 Setting .$ext to open with $ZED_APP_NAME..."
+  apply_duti "$ext"
+done
 
 echo "🎉 Done! $ZED_APP_NAME is now the default editor for text/code files."

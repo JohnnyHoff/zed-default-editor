@@ -6,7 +6,7 @@ It:
 
 - Installs [`duti`](https://github.com/moretension/duti) if needed
 - Asks if you want to use **Zed**, **Zed Preview**, or **Zed Nightly**
-- Associates a broad set of file types (including `.mdx`, `.ts`, `.py`, `.json`, etc.) with Zed
+- Associates a broad set of file types (including `.mdx`, `.ts`, `.py`, `.json`, `.kt`, `.cs`, `.sql`, etc.) with Zed
 - Automatically sets them via `duti` in one shot
 
 ---
@@ -46,7 +46,7 @@ chmod +x set_zed_defaults.sh
 This script sets Zed as the default app for:
 
 - Plain text files (`.txt`, `.md`, `.log`, `.ini`)
-- Code files (`.js`, `.ts`, `.py`, `.rs`, `.html`, `.css`, etc.)
+- Code files (`.js`, `.ts`, `.py`, `.rs`, `.kt`, `.cs`, `.sql`, `.html`, `.css`, etc.)
 - Configs (`.json`, `.xml`, `.yml`, `.plist`)
 - Markdown & MDX files (`.md`, `.mdx`)
 - Scripts (`.sh`, `.bash`, `.php`, `.rb`, etc.)
@@ -58,6 +58,10 @@ This script sets Zed as the default app for:
 If Zed isn’t detected:
 - Make sure it's installed in `/Applications`
 - You can re-run the script any time
+
+If Markdown files still open in Zed Preview:
+- Re-run the script and choose **Zed**
+- Restart Finder or log out/in to refresh Launch Services
 
 ---
 
